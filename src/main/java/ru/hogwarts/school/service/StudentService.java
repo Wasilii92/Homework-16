@@ -64,15 +64,8 @@ public class StudentService {
         return result;
     }
 
-    public Collection<Student> findByAge(int min, int max) {
-        Collection<Student> result = new ArrayList<>();
-        for (Student student : studentRepository.findAll()) {
-            int age = student.getAge();
-            if (age >= min && age <= max) {
-                result.add(student);
-            }
-        }
-        return result;
+    public Collection<Student> findByAgeBetween(int min, int max) {
+        return studentRepository.findByAgeBetween(min, max);
     }
 
     public List<Student> getStudentsByFacultyId(Long facultyId) {

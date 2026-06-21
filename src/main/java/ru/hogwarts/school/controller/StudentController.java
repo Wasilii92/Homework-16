@@ -59,7 +59,7 @@ public class StudentController {
             return ResponseEntity.ok(studentService.findByAge(age));
         }
         if (min != null && max != null && min <= max) {
-            return ResponseEntity.ok(studentService.findByAge(min, max));
+            return ResponseEntity.ok(studentService.findByAgeBetween(min, max));
         }
         return ResponseEntity.ok(Collections.emptyList());
     }
