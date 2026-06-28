@@ -73,5 +73,20 @@ public class Student {
     public Faculty getFaculty() {
         return faculty;
     }
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Avatar avatar;
+
+    // геттер и сеттер
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
 }
 
