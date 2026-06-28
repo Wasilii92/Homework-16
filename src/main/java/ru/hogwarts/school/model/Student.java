@@ -1,9 +1,7 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
 @Entity
@@ -13,7 +11,9 @@ public class Student {
     private Long id;
     private String name;
     private int age;
-
+    @ManyToOne
+    @JoinColumn(name = "faculty_id")
+    private Faculty faculty;
     // Обязательный пустой конструктор для JPA
     public Student() {
     }
@@ -69,6 +69,24 @@ public class Student {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+    public Faculty getFaculty() {
+        return faculty;
+    }
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Avatar avatar;
+
+    // геттер и сеттер
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
     }
 }
 

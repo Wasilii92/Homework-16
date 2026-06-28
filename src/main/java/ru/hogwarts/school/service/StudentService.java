@@ -7,6 +7,7 @@ import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -43,9 +44,7 @@ public class StudentService {
         return student;
     }
 
-    // Если в контроллерах был метод поиска студентов по имени – оставьте его
-    // Но чтобы не менять репозиторий, фильтруем вручную
-    public Collection<Student> findStudentsByName(String name) {
+    public Collection<Student> findByName(String name) {
         Collection<Student> result = new ArrayList<>();
         for (Student student : studentRepository.findAll()) {
             if (Objects.equals(student.getName(), name)) {
@@ -55,7 +54,6 @@ public class StudentService {
         return result;
     }
 
-    // Если был поиск по возрасту – тоже фильтруем здесь
     public Collection<Student> findByAge(int age) {
         Collection<Student> result = new ArrayList<>();
         for (Student student : studentRepository.findAll()) {
@@ -64,5 +62,13 @@ public class StudentService {
             }
         }
         return result;
+    }
+
+    public Collection<Student> findByAgeBetween(int min, int max) {
+        return studentRepository.findByAgeBetween(min, max);
+    }
+
+    public List<Student> getStudentsByFacultyId(Long facultyId) {
+        return studentRepository.findByFacultyId(facultyId);
     }
 }
